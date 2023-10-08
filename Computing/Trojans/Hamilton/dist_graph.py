@@ -1,0 +1,31 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+from progressbar import ProgressBar
+from functions import posVector, modVector, gravAcceleration, Grav_Sim, asteroid_generator
+
+asteroids = np.load('asteroids.npy')
+planets = np.load('planets.npy')
+
+N_asteroids = len(asteroids)
+ticks = len(asteroids[0])
+
+pbar=ProgressBar()
+plt.plot(0,0)
+plt.plot(0,0)
+##################### FOR LONG TIME SIMS
+for j in pbar(range(0,N_asteroids)):
+    distance = []
+    tick = []
+    for i in range(0,ticks-1):
+        tick.append(i)
+        dist_vector = asteroids[0][i] - planets[0][i]
+        dist = modVector(dist_vector)
+        distance.append(dist)
+    plt.plot(tick, distance)
+
+#plt.xlim(0,7600000)
+#plt.ylim(0,1.8e12)
+
+plt.show()
+

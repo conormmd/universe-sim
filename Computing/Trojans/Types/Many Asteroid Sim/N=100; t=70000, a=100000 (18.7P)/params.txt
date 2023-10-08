@@ -1,0 +1,5 @@
+#Asteroid gen params
+N_asteroids = 100;r0 = 777598549241.9435*0.95;r1=777598549241.9435*1.15;theta0 =np.pi/6;theta1=np.pi/2
+
+#Simulation params
+ticks = 70000;a = 100000

@@ -1,0 +1,36 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+from progressbar import ProgressBar
+from functions import posVector, modVector, gravAcceleration, Grav_Sim, asteroid_generator
+
+asteroids = np.load('asteroids.npy')
+planets = np.load('planets.npy')
+
+N_asteroids = len(asteroids)
+ticks = len(asteroids[0])
+
+pbar=ProgressBar()
+plt.plot(0,0)
+plt.plot(0,0)
+for j in pbar(range(0,N_asteroids)):
+    distance = []
+    tick = []
+    for i in range(0,ticks-1):
+        tick.append(i)
+        dist_vector = asteroids[j][i] - planets[1][i]
+        dist = modVector(dist_vector)
+        distance.append(dist)
+    plt.plot(tick, distance)
+
+np.save('distance',distance)
+
+plt.xlim(0,100000)
+plt.ylim(0.5e12, 1.1e12)
+plt.ylabel('Distance from Jupiter/m')
+plt.xlabel('Time/arb')
+
+
+plt.savefig('distance.png')
+plt.show()
+
